@@ -10,7 +10,7 @@ import json
 from google import genai
 from google.genai import types
 
-load_dotenv("prod.env")
+# load_dotenv("prod.env")
 # Original file name: follow_up_1stage.py
 
 import logging

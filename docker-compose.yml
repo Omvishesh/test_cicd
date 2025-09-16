@@ -1,12 +1,13 @@
 services:
   followup:
-    image: followup
+    build: .
     deploy:
       resources:
         limits:
-          cpus: '2.0'   
-          memory: 512M   
-    env_file:
-      - prod.env
+          cpus: '2.0'
+          memory: 512M
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      ACQ_API_KEY: ${ACQ_API_KEY}
     ports:
       - "8074:8000"
