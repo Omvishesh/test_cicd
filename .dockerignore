@@ -1,8 +1,0 @@
-__pycache__/
-*.pyc
-*.pkl
-*.csv
-*.zip
-*.db
-.venv/
-.git/

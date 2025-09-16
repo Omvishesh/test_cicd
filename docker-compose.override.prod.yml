@@ -1,4 +1,0 @@
-services:
-  retrieval:
-    env_file:
-      - .env.prod
