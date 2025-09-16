@@ -1,6 +1,6 @@
 services:
   followup:
-    image: followup
+    build: .
     deploy:
       resources:
         limits:
