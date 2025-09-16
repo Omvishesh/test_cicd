@@ -20,7 +20,7 @@ jobs:
           echo "Secrets loaded into environment"
 
       - name: Deploy with Docker Compose
-        working-directory: $HOME/test_cicd
+        working-directory: /home/clouduser/test_cicd
         run: |
           docker-compose down || true
           docker-compose up -d --build
