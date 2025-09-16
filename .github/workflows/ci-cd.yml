@@ -1,35 +1,31 @@
-name: CI/CD Pipeline - Dev
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - dev   # Trigger only when pushing to dev branch
+      - dev   # Run only when pushing to dev branch
 
 jobs:
   deploy:
-    runs-on: self-hosted   # uses your VM runner
+    runs-on: self-hosted   # Use your self-hosted runner inside VPN
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Dev VM
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DEV_HOST }}
-          username: ${{ secrets.DEV_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          ssh_options: "-m hmac-sha2-512"
-          envs: GEMINI_API_KEY,ACQ_API_KEY
-          script: |
-            cd ~/test_cicd || git clone https://github.com/Omvishesh/test_cicd.git ~/test_cicd
-            cd ~/test_cicd
-            git fetch origin dev
-            git reset --hard origin/dev
+      - name: Go to project folder
+        run: |
+          mkdir -p ~/test_cicd
+          cp -r . ~/test_cicd/
+          cd ~/test_cicd
 
-            # Inject secrets into environment before running docker-compose
-            export GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            export ACQ_API_KEY=${{ secrets.ACQ_API_KEY }}
+      - name: Inject secrets as env vars
+        run: |
+          export GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          export ACQ_API_KEY=${{ secrets.ACQ_API_KEY }}
+          echo "Secrets loaded into environment"
 
-            docker-compose down || true
-            docker-compose up -d --build
-
+      - name: Deploy with Docker Compose
+        working-directory: ~/test_cicd
+        run: |
+          docker-compose down || true
+          docker-compose up -d --build
