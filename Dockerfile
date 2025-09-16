@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy requirements file and install dependencies (optional)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r iip_req.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of your application code
 COPY . .
