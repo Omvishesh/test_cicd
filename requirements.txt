@@ -1,0 +1,4 @@
+load_dotenv
+fastapi[standard]
+google
+google-genai

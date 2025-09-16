@@ -1,0 +1,12 @@
+services:
+  followup:
+    image: followup
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'   
+          memory: 512M   
+    env_file:
+      - prod.env
+    ports:
+      - "8074:8000"
