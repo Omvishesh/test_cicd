@@ -21,8 +21,8 @@ jobs:
           ssh_options: "-m hmac-sha2-512"
           envs: GEMINI_API_KEY,ACQ_API_KEY
           script: |
-            cd ~/apps/my-project || git clone https://github.com/<your-username>/<your-repo>.git ~/apps/my-project
-            cd ~/apps/my-project
+            cd ~/test_cicd || git clone https://github.com/Omvishesh/test_cicd.git ~/test_cicd
+            cd ~/test_cicd
             git fetch origin dev
             git reset --hard origin/dev
 
