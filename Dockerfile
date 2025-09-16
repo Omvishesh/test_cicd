@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy requirements file and install dependencies (optional)
-COPY iip_req.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r iip_req.txt
 
 # Copy the rest of your application code
