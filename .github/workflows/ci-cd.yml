@@ -6,8 +6,8 @@ on:
       - dev   # Trigger only when pushing to dev branch
 
 jobs:
-  deploy-dev:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted   # uses your VM runner
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
