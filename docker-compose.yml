@@ -1,11 +1,14 @@
+version: "3.8"
+
 services:
   followup:
-    image: followup:latest
+    build: .                     # build from the Dockerfile in current directory
+    image: followup:latest       # tag the locally built image
     deploy:
       resources:
         limits:
-          cpus: '2.0'   
-          memory: 512M   
+          cpus: '2.0'
+          memory: 512M
     env_file:
       - prod.env
     ports:
