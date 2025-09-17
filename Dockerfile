@@ -13,4 +13,4 @@ COPY . .
 
 # Set the default command to run your application
 # Adjust 'main.py' as needed for your entrypoint
-CMD ["nohup", "uvicorn", "follow_up_questions:followup", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["nohup", "uvicorn", "src.follow_up_questions:followup", "--host", "0.0.0.0", "--port", "8000"]
