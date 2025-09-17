@@ -13,12 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Create prod.env file
+      - name: Sync code to VM directory
+        run: |
+          # Make sure folder exists
+          mkdir -p /home/clouduser/test_cicd
+
+          # Copy latest code to VM directory
+          rsync -av --delete ./ /home/clouduser/test_cicd/
+
+      - name: Generate prod.env
         working-directory: /home/clouduser/test_cicd
         run: |
-          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> prod.env
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > prod.env
           echo "ACQ_API_KEY=${{ secrets.ACQ_API_KEY }}" >> prod.env
-          echo "✅ prod.env created with secrets"
 
       - name: Deploy with Docker Compose
         working-directory: /home/clouduser/test_cicd
