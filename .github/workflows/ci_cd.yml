@@ -13,11 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Inject secrets as env vars
+      - name: Create prod.env file
+        working-directory: /home/clouduser/test_cicd
         run: |
-          export GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          export ACQ_API_KEY=${{ secrets.ACQ_API_KEY }}
-          echo "Secrets loaded into environment"
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> prod.env
+          echo "ACQ_API_KEY=${{ secrets.ACQ_API_KEY }}" >> prod.env
+          echo "✅ prod.env created with secrets"
 
       - name: Deploy with Docker Compose
         working-directory: /home/clouduser/test_cicd
